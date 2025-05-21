@@ -1,0 +1,10 @@
+    https://leetcode.com/problems/sales-person/?envType=study-plan-v2&envId=30-days-of-pandas&lang=pythondata
+
+    new_table = company.merge(orders, how="left", on = "com_id")
+    required_table = new_table[["com_id","name","sales_id"]]
+    result = sales_person.merge(required_table, how = "left", on = "sales_id")
+    result = result[["sales_id","name_x","name_y"]]
+    result = result.groupby('name_x').apply(lambda x: list(x.name_y)).reset_index()
+    result.columns = ['name', 'colour']
+    result = result[result["colour"].apply(lambda x: "RED" not in x)]
+    return result["name"].to_frame()
